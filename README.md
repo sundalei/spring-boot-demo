@@ -33,7 +33,7 @@ Spring Boot的主要优点：
   4. 若你的环境有多个版本的JDK，注意到选择Java SDK的时候请选择Java 7以上的版本
 
 ## 项目结构解析
-![Image of Project Structure](file:///D://chapter1-2.png)
+![test](http://blog.didispace.com/content/images/2016/02/chapter1-2.png)
 通过上面步骤完成了基础项目的创建，如上图所示，Spring Boot的基础结构共三个文件（具体路径根据用户生成项目时填写的Group所有差异）：
 * src/main/java下的程序入口：Chapter1Application
 * src/main/resources下的配置文件：application.properties

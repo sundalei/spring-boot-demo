@@ -14,3 +14,8 @@
 并与Spring MVC程序配合组织出强大RESTful API文档。它既可以减少我们创建文档的工作量，同时说明内容又整合入实现代码中，
 让维护文档和修改代码整合为一体，可以让我们在修改代码逻辑的同时方便的修改文档说明。另外Swagger2也提供了强大的页面测试功能来调试每个RESTful API。
 具体效果如下图所示：
+
+![Swagger](/images/swagger2_1.png)
+
+下面来具体介绍，如果在Spring Boot中使用Swagger2。首先，我们需要一个Spring Boot实现的RESTful API工程，若您没有做过这类内容，建议先阅读
+[Spring Boot构建一个较为复杂的RESTful APIs和单元测试](https://github.com/sundalei/spring-boot-demo/blob/master/Spring%20Boot%E6%9E%84%E5%BB%BARESTful%20API%E4%B8%8E%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.md)。

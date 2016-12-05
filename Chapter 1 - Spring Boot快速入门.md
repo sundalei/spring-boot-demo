@@ -24,7 +24,7 @@ Spring Boot的主要优点：
 1. 通过```SPRING INITIALIZR```工具产生基础项目
   1. 访问：```http://start.spring.io/```
   2. 选择构建工具```Maven Project```、Spring Boot版本```1.3.2```以及一些工程基本信息，可参考下图所示
-  ![Image of SPRING INITIALIZR](/images/chapter1-1.png)
+  ![Image of SPRING INITIALIZR](./images/chapter1-1.png)
   3. 点击```Generate Project```下载项目压缩包
 2. 解压项目包，并用IDE以```Maven```项目导入，以```IntelliJ IDEA 14```为例：
   1. 菜单中选择```File–>New–>Project from Existing Sources...```

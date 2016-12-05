@@ -33,4 +33,4 @@ Spring Boot的主要优点：
   4. 若你的环境有多个版本的JDK，注意到选择Java SDK的时候请选择Java 7以上的版本
 
 ## 项目结构解析
-![Image of Project Structure](http://blog.didispace.com/content/images/2016/02/chapter1-2.png)
+  ![Image of Project Structure](http://blog.didispace.com/content/images/2016/02/chapter1-2.png)

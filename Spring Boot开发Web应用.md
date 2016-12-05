@@ -110,7 +110,7 @@ public class HelloController {
 
 如有需要修改默认配置的时候，只需复制下面要修改的属性到```application.properties```中，并修改成需要的值，如修改模板文件的扩展名，修改默认的模板路径等。
 
-```
+```properties
 # Enable template caching.
 spring.thymeleaf.cache=true 
 # Check that the templates location exists.
@@ -130,3 +130,9 @@ spring.thymeleaf.prefix=classpath:/templates/
 # Suffix that gets appended to view names when building a URL.
 spring.thymeleaf.suffix=.html  spring.thymeleaf.template-resolver-order= # Order of the template resolver in the chain. spring.thymeleaf.view-names= # Comma-separated list of view names that can be resolved.
 ```
+
+### 支持JSP的配置
+
+Spring Boot并不建议使用，但如果一定要使用，可以参考此工程作为脚手架：[JSP支持](https://github.com/spring-projects/spring-boot/tree/v1.3.2.RELEASE/spring-boot-samples/spring-boot-sample-web-jsp)
+
+[Spring Boot教程完整案例](http://git.oschina.net/didispace/SpringBoot-Learning)

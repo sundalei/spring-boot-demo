@@ -1,9 +1,9 @@
 # Spring Boot构建RESTful API与单元测试
 
 首先，回顾并详细说明一下在
-[快速入门](/Spring%20Boot%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8.md)中使用的
+[快速入门](./Chapter%201%20-%20Spring%20Boot%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8.md)中使用的
 ```@Controller、@RestController、@RequestMapping```注解。如果您对Spring MVC不熟悉并且还没有尝试过快速入门案例，建议先看一下
-[快速入门](/Spring%20Boot%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8.md)的内容。
+[快速入门](./Chapter%201%20-%20Spring%20Boot%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8.md)的内容。
 
 * ```@Controller```：修饰class，用来创建处理http请求的对象
 * ```@RestController```：Spring4之后加入的注解，原来在```@Controller```中返回json需要```@ResponseBody```来配合，如果直接用```@RestController```

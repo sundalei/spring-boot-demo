@@ -125,3 +125,19 @@ public class UserController {
 
 完成上述代码添加上，启动Spring Boot程序，访问：[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 。就能看到前文所展示的RESTful API的页面。我们可以再点开具体的API请求，以POST类型的/users请求为例，可找到上述代码中我们配置的Notes信息以及参数user的描述信息，如下图所示。
+
+![RESTful API](/images/swagger2_2.png)
+
+## API文档访问与调试
+
+在上图请求的页面中，我们看到user的Value是个输入框？是的，Swagger除了查看接口功能外，还提供了调试测试功能，我们可以点击上图中右侧的Model Schema（黄色区域：它指明了User的数据结构），此时Value中就有了user对象的模板，我们只需要稍适修改，点击下方**“Try it out！”**按钮，即可完成了一次请求调用！
+
+此时，你也可以通过几个GET请求来验证之前的POST请求是否正确。
+
+相比为这些接口编写文档的工作，我们增加的配置内容是非常少而且精简的，对于原有代码的侵入也在忍受范围之内。因此，在构建RESTful API的同时，加入swagger来对API文档进行管理，是个不错的选择。
+
+完整结果示例可查看[Chapter3-1-5](http://git.oschina.net/didispace/SpringBoot-Learning)。
+
+## 参考信息
+
+* [Swagger官方网站](http://swagger.io/)

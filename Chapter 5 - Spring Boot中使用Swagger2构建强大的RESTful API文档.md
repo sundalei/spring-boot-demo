@@ -18,7 +18,7 @@
 ![Swagger](/images/swagger2_1.png)
 
 下面来具体介绍，如果在Spring Boot中使用Swagger2。首先，我们需要一个Spring Boot实现的RESTful API工程，若您没有做过这类内容，建议先阅读
-[Spring Boot构建一个较为复杂的RESTful APIs和单元测试](/Spring%20Boot%E6%9E%84%E5%BB%BARESTful%20API%E4%B8%8E%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.md)。
+[Spring Boot构建一个较为复杂的RESTful APIs和单元测试](./Chapter%204%20-%20Spring%20Boot%E6%9E%84%E5%BB%BARESTful%20API%E4%B8%8E%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.md)。
 
 下面的内容我们会以[教程样例](http://git.oschina.net/didispace/SpringBoot-Learning)中的Chapter3-1-1进行下面的实验（Chpater3-1-5是我们的结果工程，亦可参考）。
 

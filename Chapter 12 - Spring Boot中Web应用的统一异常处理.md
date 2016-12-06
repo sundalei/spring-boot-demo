@@ -57,8 +57,86 @@ class GlobalExceptionHandler {
 
 启动该应用，访问：```http://localhost:8080/hello```，可以看到如下错误提示页面。
 
+![error2](./images/chapter12-error2.png)
 
+_通过实现上述内容之后，我们只需要在```Controller```中抛出```Exception```，当然我们可能会有多种不同的```Exception```。然后在```@ControllerAdvice```类中，根据抛出的具体```Exception```类型匹配```@ExceptionHandler```中配置的异常类型来匹配错误映射和处理。_
 
+## 返回JSON格式
 
+在上述例子中，通过```@ControllerAdvice```统一定义不同Exception映射到不同错误处理页面。而当我们要实现RESTful API时，返回的错误是JSON格式的数据，而不是HTML页面，这时候我们也能轻松支持。
+
+本质上，只需在```@ExceptionHandler```之后加入```@ResponseBody```，就能让处理函数return的内容转换为JSON格式。
+
+下面以一个具体示例来实现返回JSON格式的异常处理。
+
+* 创建统一的JSON返回对象，code：消息类型，message：消息内容，url：请求的url，data：请求返回的数据
+
+```java
+public class ErrorInfo<T> {
+    public static final Integer OK = 0;
+    public static final Integer ERROR = 100;
+    private Integer code;
+    private String message;
+    private String url;
+    private T data;
+    // 省略getter和setter
+}
+```
+
+* 创建一个自定义异常，用来实验捕获该异常，并返回json
+
+```java
+public class MyException extends Exception {
+    public MyException(String message) {
+        super(message);
+    }
+    
+}
+```
+
+* ```Controller```中增加json映射，抛出```MyException```异常
+
+```java
+@Controller
+public class HelloController {
+    @RequestMapping("/json")
+    public String json() throws MyException {
+        throw new MyException("发生错误2");
+    }
+}
+```
+
+* 为```MyException```异常创建对应的处理
+
+```java
+@ControllerAdvice
+public class GlobalExceptionHandler {
+    @ExceptionHandler(value = MyException.class)
+    @ResponseBody
+    public ErrorInfo<String> jsonErrorHandler(HttpServletRequest req, MyException e) throws Exception {
+        ErrorInfo<String> r = new ErrorInfo<>();
+        r.setMessage(e.getMessage());
+        r.setCode(ErrorInfo.ERROR);
+        r.setData("Some Data");
+        r.setUrl(req.getRequestURL().toString());
+        return r;
+    }
+}
+```
+
+* 启动应用，访问：[http://localhost:8080/json](http://localhost:8080/json)，可以得到如下返回内容：
+
+```javascript
+{
+    code: 100，
+    data: "Some Data"，
+    message: "发生错误2"，
+    url: "http://localhost:8080/json"
+}
+```
+
+至此，已完成在Spring Boot中创建统一的异常处理，实际实现还是依靠Spring MVC的注解，更多更深入的使用可参考Spring MVC的文档。
+
+本文完整示例：[chapter3-1-6](http://git.oschina.net/didispace/SpringBoot-Learning)
 
 

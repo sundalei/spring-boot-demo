@@ -130,4 +130,102 @@ Applying plugin configuration to rabbit@PC-201602152056... started 6 plugins.
 ```
 - 在```application.properties```中配置关于RabbitMQ的连接和用户信息，用户可以回到上面的安装内容，在管理页面中创建用户。
 
+```properties
+spring.application.name=rabbitmq-hello
+spring.rabbitmq.host=localhost
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=spring
+spring.rabbitmq.password=123456
+```
 
+- 创建消息生产者```Sender```。通过注入```AmqpTemplate```接口的实例来实现消息的发送，```AmqpTemplate```接口定义了一套针对AMQP协议的基础操作。在Spring Boot中会根据配置来注入其具体实现。在该生产者，我们会产生一个字符串，并发送到名为```hello```的队列中。
+
+```java
+@Component
+public class Sender {
+    @Autowired
+    private AmqpTemplate rabbitTemplate;
+    public void send() {
+        String context = "hello " + new Date();
+        System.out.println("Sender : " + context);
+        this.rabbitTemplate.convertAndSend("hello", context);
+    }
+}
+```
+
+- 创建消息消费者```Receiver```。通过```@RabbitListener```注解定义该类对```hello```队列的监听，并用```@RabbitHandler```注解来指定对消息的处理方法。所以，该消费者实现了对```hello```队列的消费，消费操作为输出消息的字符串内容。
+
+```java
+@Component
+@RabbitListener(queues = "hello")
+public class Receiver {
+    @RabbitHandler
+    public void process(String hello) {
+        System.out.println("Receiver : " + hello);
+    }
+}
+```
+
+- 创建RabbitMQ的配置类```RabbitConfig```，用来配置队列、交换器、路由等高级信息。这里我们以入门为主，先以最小化的配置来定义，以完成一个基本的生产和消费过程。
+
+```java
+@Configuration
+public class RabbitConfig {
+    @Bean
+    public Queue helloQueue() {
+        return new Queue("hello");
+    }
+}
+```
+
+- 创建应用主类：
+
+```java
+@SpringBootApplication
+public class HelloApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(HelloApplication.class, args);
+    }
+}
+```
+
+- 创建单元测试类，用来调用消息生产：
+
+```java
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = HelloApplication.class)
+public class HelloApplicationTests {
+    @Autowired
+    private Sender sender;
+    @Test
+    public void hello() throws Exception {
+        sender.send();
+    }
+}
+```
+
+完成程序编写之后，下面开始尝试运行。首先确保RabbitMQ Server已经开始，然后进行下面的操作：
+
+- 启动应用主类，从控制台中，我们看到如下内容，程序创建了一个访问```127.0.0.1:5672```中```springcloud```的连接。
+
+```log
+o.s.a.r.c.CachingConnectionFactory       : Created new connection: SimpleConnection@29836d32 [delegate=amqp://springcloud@127.0.0.1:5672/]
+```
+
+同时，我们通过RabbitMQ的控制面板，可以看到Connection和Channels中包含当前连接的条目。
+
+- 运行单元测试类，我们可以看到控制台中输出下面的内容，消息被发送到了RabbitMQ Server的```hello```队列中。
+
+```log
+Sender : hello Sun Sep 25 11:06:11 CST 2016
+```
+
+- 切换到应用主类的控制台，我们可以看到类似如下输出，消费者对```hello```队列的监听程序执行了，并输出了接受到的消息信息。
+
+```log
+Receiver : hello Sun Sep 25 11:06:11 CST 2016
+```
+
+通过上面的示例，我们在Spring Boot应用中引入```spring-boot-starter-amqp```模块，进行简单配置就完成了对RabbitMQ的消息生产和消费的开发内容。然而在实际应用中，我们还有很多内容没有演示，这里不做更多的讲解，读者可以自行查阅RabbitMQ的官方教程，有更全面的了解。
+
+完整示例：[Chapter5-2-1](./demos/Chapter5-2-1)

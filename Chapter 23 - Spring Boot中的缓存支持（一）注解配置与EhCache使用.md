@@ -173,4 +173,4 @@ spring.cache.ehcache.config=classpath:config/another-config.xml
 
 ```
 
-完整示例：[Chapter-4-4-1](./demos/Chpater4-4-1)
+完整示例：[Chapter-4-4-1](./demos/Chapter4-1-1)

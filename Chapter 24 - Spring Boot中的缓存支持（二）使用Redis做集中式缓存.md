@@ -24,7 +24,7 @@
 
 * 删除EhCache的配置文件```src/main/resources/ehcache.xml```
 
-* ```pom.xml```中删除EhCache的依赖，增加redis的依赖：
+* 在```pom.xml```中删除EhCache的依赖，增加redis的依赖：
 
 ```xml
 <dependency>
